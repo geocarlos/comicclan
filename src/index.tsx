@@ -3,10 +3,14 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux';
+import saga from 'redux-saga';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+	  <Provider store={createStore(reducer, applyMiddleware(saga()))}><App /></Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
