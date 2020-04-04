@@ -15,10 +15,9 @@ const InputBox = styled.div`
 	border-radius: 8px;
 `;
 
-const TextInput = styled.input`
+const TextInput = styled(({...props}) => <input placeholder="Search books by name" {...props} />)`
 	flex: 1;
 	height: 90%;
-	margin: 28px;
 	background: transparent;
 	border: none;
 	outline: none;

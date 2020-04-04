@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import BookItem from './minor/BookItem';
 import Search from './minor/Search';
 import Nav from './minor/Nav';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchBooks } from '../actions/Actions';
+import IBook from '../models/IBook';
 
 interface ItemProps extends React.HTMLAttributes<HTMLElement>{
 	column?: string;
@@ -30,14 +33,12 @@ const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowGap }) =
 	font-style: normal;
 	color: #5A5A5A;
 	background-color: #333;
-	min-height: ${({ heightSub }) => heightSub ? `calc(100hv - ${heightSub})vh` : '100vh'};
+	min-height: ${({ heightSub }) => heightSub ? `calc(100vh - ${heightSub}px)` : '100%'};
 	.top-bar {
 		display: flex;
 		align-items: center;
 		padding: 1.2%;
 		margin: 0;
-		width: 100vw;
-
 	}
 	.search-box {
 		display: flex;
@@ -50,12 +51,25 @@ const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowGap }) =
 		width: 100%;
 	}
 	.content {
-		max-width: 1200px;
+		max-width: 1100px;
 		margin: auto;
 	}
 	.item-list {
 		display: grid;
 		justify-content: space-between;
+	}
+	.header {
+		grid-column: 1/13;
+		position: sticky;
+		top: 0;
+	}
+	footer {
+		grid-column: 1/13;
+		padding: 2px;
+		margin-top: 3em;
+		background: #53535377;
+		text-align: center;
+		color: #fff;
 	}
 `;
 const GridItem = styled(({ column, className, height, background, ...props } :ItemProps) => <div className={className} {...props} />)`
@@ -65,17 +79,20 @@ const GridItem = styled(({ column, className, height, background, ...props } :It
 	background: ${({ background }) => background || 'transparent'};
 `;
 
-const fakeList: number[] = [];
-
-for (let i = 1; i <= 30; i++) {
-	fakeList.push(i);
-}
-
 const setCategory = (cat: string)=> {
 	console.log(cat);
 }
  
 const MainPage = () => {
+	const dispatch = useDispatch();
+	const books = useSelector((state: any) => state.list.books);
+	useEffect(() => {
+		dispatch(fetchBooks('https://comicclan.vett.io/comics'));
+	}, [dispatch])
+
+	useEffect(() => {
+		console.log(books);
+	})
 	return (
 		<Grid>
 			<GridItem className="top-bar" height={8} background="#535353">
@@ -86,23 +103,28 @@ const MainPage = () => {
 			</GridItem>
 			<GridItem>
 				<Grid heightSub={7}>
-					<GridItem height={10} className="search-box content">
-						<Search query={''} />
-					</GridItem>
-					<GridItem height={10} className="content nav">
-						<Grid heightSub={1}>
-							<Nav handler={setCategory} />
-						</Grid>
-					</GridItem>
+					<Grid className="header">
+						<GridItem height={10} className="search-box content">
+							<Search query={''} />
+						</GridItem>
+						<GridItem height={10} className="content nav">
+							<Grid>
+								<Nav handler={setCategory} />
+							</Grid>
+						</GridItem>
+					</Grid>
 					<GridItem>
 						<Grid columns={5} rowGap={3} className="content item-list">
-							{fakeList.map(n => (
-								<BookItem key={n} id={n} />
+							{books.map((book: IBook) => (
+								<BookItem key={book.name} book={book} />
 							))}
 						</Grid>
 					</GridItem>
 				</Grid>
 			</GridItem>
+			<footer>
+				Vett.io {new Date().getFullYear()}
+			</footer>
 		</Grid>
 	);
 }
