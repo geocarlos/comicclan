@@ -63,16 +63,6 @@ const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowGap }) =
 		grid-auto-rows: min-content;
 		justify-content: space-between;
 	}
-	.category {
-		grid-column: 1/6;
-		display: grid;
-		grid-template-columns: repeat(12, auto)
-		grid-auto-rows: min-content;
-		justify-content: space-between;
-		header {
-			grid-column: 1/13;
-		}
-	}
 	.header {
 		grid-column: 1/13;
 		position: sticky;
@@ -119,6 +109,10 @@ const MainPage = () => {
 	}, [books, category])
 
 	const handleChooseCategory = (cat: Categories) => {
+		if (cat === Categories.RANDOM) {
+			setCategory([Categories.ARTIST, Categories.YEAR, Categories.WRITER, Categories.OWNER][Math.floor(Math.random() * 4)]);
+			return;
+		}
 		setCategory(cat);
 	}
 
@@ -139,13 +133,13 @@ const MainPage = () => {
 						</GridItem>
 						<GridItem height={10} className="content nav">
 							<Grid>
-								<Nav handler={handleChooseCategory} />
+								<Nav handler={handleChooseCategory} current={category} />
 							</Grid>
 						</GridItem>
 					</Grid>
 					<GridItem>
 						<Grid columns={5} rowGap={3} className="content category-list">
-							{groups && Object.keys(groups).map((key: string) => (
+							{groups && Object.keys(groups).reverse().map((key: string) => (
 								<Category key={key} group={key} books={groups[key]} />
 							))}
 						</Grid>

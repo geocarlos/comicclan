@@ -13,6 +13,7 @@ const Tile = styled.div`
 	font-size: 2rem;
 	figure {
 		height: 300px;
+		margin: 0;
 		color: #fff;
 		img {
 			max-width: 100%;
