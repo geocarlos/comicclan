@@ -1,11 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import BookItem from './minor/BookItem';
-import Search from './minor/Search';
-import Nav from './minor/Nav';
+import Search from './page-elements/Search';
+import Nav from './page-elements/Nav';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchBooks } from '../actions/Actions';
 import IBook from '../models/IBook';
+import IStore from '../store/IStore';
+import Categories from './page-elements/Categories';
+import Category from './page-elements/Category';
 
 interface ItemProps extends React.HTMLAttributes<HTMLElement>{
 	column?: string;
@@ -54,9 +56,22 @@ const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowGap }) =
 		max-width: 1100px;
 		margin: auto;
 	}
-	.item-list {
+	.category-list {
+		grid-column: 1/13;
 		display: grid;
+		grid-template-columns: repeat(5, auto)
+		grid-auto-rows: min-content;
 		justify-content: space-between;
+	}
+	.category {
+		grid-column: 1/6;
+		display: grid;
+		grid-template-columns: repeat(12, auto)
+		grid-auto-rows: min-content;
+		justify-content: space-between;
+		header {
+			grid-column: 1/13;
+		}
 	}
 	.header {
 		grid-column: 1/13;
@@ -79,20 +94,35 @@ const GridItem = styled(({ column, className, height, background, ...props } :It
 	background: ${({ background }) => background || 'transparent'};
 `;
 
-const setCategory = (cat: string)=> {
-	console.log(cat);
+const groupBooks = (books: IBook[], category: Categories): any => {
+	const groups: any = {};
+	for (const book of books) {
+		if (!groups[book[category]]) {
+			groups[book[category]] = [];
+		}
+		groups[book[category]].push(book);
+	}
+	return groups;
 }
  
 const MainPage = () => {
 	const dispatch = useDispatch();
-	const books = useSelector((state: any) => state.list.books);
+	const books: IBook[] = useSelector((state: IStore) => state.list.books);
+	const [groups, setGroups] = useState<any>();
+	const [category, setCategory] = useState(Categories.YEAR);
 	useEffect(() => {
 		dispatch(fetchBooks('https://comicclan.vett.io/comics'));
 	}, [dispatch])
 
 	useEffect(() => {
-		console.log(books);
-	})
+		setGroups(groupBooks(books, category));
+	}, [books, category])
+
+	const handleChooseCategory = (cat: Categories) => {
+		setCategory(cat);
+	}
+
+	console.log(groups);
 	return (
 		<Grid>
 			<GridItem className="top-bar" height={8} background="#535353">
@@ -109,14 +139,14 @@ const MainPage = () => {
 						</GridItem>
 						<GridItem height={10} className="content nav">
 							<Grid>
-								<Nav handler={setCategory} />
+								<Nav handler={handleChooseCategory} />
 							</Grid>
 						</GridItem>
 					</Grid>
 					<GridItem>
-						<Grid columns={5} rowGap={3} className="content item-list">
-							{books.map((book: IBook) => (
-								<BookItem key={book.name} book={book} />
+						<Grid columns={5} rowGap={3} className="content category-list">
+							{groups && Object.keys(groups).map((key: string) => (
+								<Category key={key} group={key} books={groups[key]} />
 							))}
 						</Grid>
 					</GridItem>

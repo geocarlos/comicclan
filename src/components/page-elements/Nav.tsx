@@ -1,13 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
+import Categories from './Categories';
 
-const categories: string[] = [
-	"Year",
-	"Writer",
-	"Artist",
-	"Owner",
-	"Random"
+const categories: Categories[] = [
+	Categories.YEAR,
+	Categories.WRITER,
+	Categories.ARTIST,
+	Categories.OWNER,
+	Categories.RANDOM
 ];
+
+const capitalize = (word: string) => word[0].toUpperCase() + word.substring(1);
 
 interface INavItem extends React.HTMLAttributes<HTMLElement> {
 	text: string;
@@ -32,14 +35,14 @@ const NavItem = styled(({text, ...props}: INavItem) => <div {...props}>{text}</d
 `;
 
 interface IProps {
-	handler: (cat: string) => void;
+	handler: (cat: Categories) => void;
 }
 
 const Nav = ({ handler }: IProps) => {
 	return (
 		<React.Fragment>
 			{categories.map(cat => (
-				<NavItem key={cat} text={cat} onClick={() => handler(cat)} />
+				<NavItem key={cat} text={capitalize(cat !== 'summary' ? cat : 'random')} onClick={() => handler(cat)} />
 			))}
 		</React.Fragment>
 	)
