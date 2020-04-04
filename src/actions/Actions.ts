@@ -1,9 +1,11 @@
 import keys from './ActionTypeKeys';
-import {IGetBooks} from './IActions';
+import { IReceiveBooks, IRequestBooks } from './IActions';
 
-export function getBooks(books: Array<any>): IGetBooks {
+export const fetchBooks = (url: string): IRequestBooks => ({type: keys.REQUEST_BOOKS, url});
+
+export function receiveBooks(books: Array<any>): IReceiveBooks {
 	return {
-		type: keys.GET_BOOKS,
+		type: keys.RECEIVE_BOOKS,
 		books
 	}
 }

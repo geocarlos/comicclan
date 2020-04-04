@@ -1,5 +1,5 @@
-import { IGetBooks } from './IActions';
+import { IReceiveBooks, IRequestBooks, IErrorReceivingBooks } from './IActions';
 
-type ActionTypes = IGetBooks;
+type ActionTypes = IReceiveBooks | IRequestBooks | IErrorReceivingBooks;
 
 export default ActionTypes;
