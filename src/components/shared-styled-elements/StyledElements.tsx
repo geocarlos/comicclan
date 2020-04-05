@@ -54,15 +54,6 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		top: 0;
 		z-index: 1000;
 	}
-	a {
-		color: #5A5A5A;
-		&:hover {
-			#5A5A5A;
-		}
-		&:visited{
-			#5A5A5A;
-		}
-	}
 	.book-list {
 		display: grid;
 		grid-template-columns: repeat(auto-fill, 160px);
@@ -71,6 +62,16 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		padding: 0;
 		margin: 0;
 		max-width: 100%;
+	}
+	@media(max-width: 800px) {
+		.book-list {
+			grid-template-columns: repeat(auto-fill, 140px);
+			column-gap: 10px;
+			justify-content: space-between;
+			padding: 0;
+			margin: 5px;
+			max-width: 100%;
+		}
 	}
 `;
 export const GridItem = styled(({ column, className, height, background, ...props }: ItemProps) => <div className={className} {...props} />)`

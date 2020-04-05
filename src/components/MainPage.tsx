@@ -69,8 +69,8 @@ const MainPage = () => {
 						</GridItem>
 					</Grid>
 					<GridItem>
-						<Grid columns={5} rowGap={3} className="content category-list">
-							{isLoading ? fakeList.map(i => (<FakeBook />)) : groups && Object.keys(groups).reverse().map((key: string) => (
+						<Grid columns={5} rowGap={3} className={isLoading ? 'book-list' : 'content category-list'}>
+							{isLoading ? fakeList.map(i => (<FakeBook key={i} />)) : groups && Object.keys(groups).reverse().map((key: string) => (
 								<Category key={key} group={key} books={groups[key]} />
 							))}
 						</Grid>

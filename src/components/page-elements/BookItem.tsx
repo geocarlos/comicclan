@@ -31,7 +31,7 @@ const Tile = styled.div`
 		}
 		figcaption {
 			position: absolute;
-			height: 22%;
+			height: 10%;
 			bottom: 0;
 			font-weight: 500;
 			font-size: 12px;
@@ -45,6 +45,15 @@ const Tile = styled.div`
 				overflow: hidden;
 				text-overflow: ellipsis;
 			}
+		}
+	}
+	@media (max-width: 800px) {
+		width: 140px;
+		height: 240px;
+		margin-bottom: 3rem;
+		figure {
+			height: 240px;
+			width: 140px;
 		}
 	}
 `;
@@ -84,5 +93,10 @@ export const FakeBook = styled.div`
 	position: relative;
 	animation: loading 3s;
 	animation-iteration-count: infinite;
+	@media (max-width: 800px) {
+		width: 140px;
+		height: 240px;
+		margin-bottom: 3rem;
+	}
 `;
 export default BookItem;

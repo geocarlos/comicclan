@@ -10,6 +10,22 @@ import { fetchBooks } from '../actions/Actions';
 import Stars from './page-elements/Stars';
 import BookItem from './page-elements/BookItem';
 
+const BookContainer = styled.div`
+	color: #CCC;
+	background-color: #333;
+	min-height: 100vh;
+	max-width: 100%;
+	a {
+		color: #9A9A9A;
+		&:hover {
+			#5A5A5A;
+		}
+		&:visited{
+			#5A5A5A;
+		}
+	}
+`;
+
 const Cover = styled.div`
 	margin: 2rem;
 	height: 390px;
@@ -19,6 +35,11 @@ const Cover = styled.div`
 	border-radius: 4px;
 	img {
 		width: 100%;
+	}
+	@media (max-width: 800px) {
+		margin: 1rem;
+		height: 185px;
+		width: 127px;
 	}
 `;
 
@@ -32,7 +53,7 @@ const Description = styled(({...props}) => <div {...props}/>)`
 		line-height: 37px;
 	}
 	.other-info {
-		margin: 1rem 0;
+		margin: 1rem 1rem 0 0;
 		font-weight: 500;
 		font-size: 16px;
 		line-height: 25px;
@@ -46,6 +67,7 @@ const Description = styled(({...props}) => <div {...props}/>)`
 		grid-column-gap: 1rem;
 	}
 	@media (max-width: 800px) {
+		margin: 1rem 1rem 0 0;
 		.summary {
 			grid-column: 1 / 3;
 		}
@@ -54,6 +76,9 @@ const Description = styled(({...props}) => <div {...props}/>)`
 
 const BackLink = styled(({...props}) => <div {...props}>{'< '}<Link to='/books'>{'Back to collection'}</Link></div>)`
 	margin: 2rem 0 0 2rem;
+	@media (max-width: 800px) {
+		margin: 1rem 0 0 1rem;
+	}
 `
 
 const Heading = styled.div`
@@ -68,10 +93,13 @@ const Heading = styled.div`
 const RandomBooks = styled(({className, ...props}) => <div className={className} {...props} />)`
 	grid-column: 1/13;
 	margin: 2rem !important;
+	@media (max-width: 800px) {
+		margin: 1rem !important;
+	}
 `
 
 const Page = styled.div`
-	color: #CCC;
+	grid-column: 1/13;
 	display: grid;
 	grid-template-columns: repeat(2, auto);
 	grid-auto-rows: min-content;
@@ -85,7 +113,7 @@ const Page = styled.div`
 		.summary-m {
 			display: block;
 			white-space: pre-line;
-			margin: 0 2rem;
+			margin: 0 1rem;
 			grid-column: 1 / 3;
 		}
 		.summary {
@@ -110,7 +138,7 @@ const BookPage = () => {
 	}, [dispatch])
 
 	return (
-		<Grid heightSub={0.01}>
+		<BookContainer>
 			<TopBar />
 			<BackLink />
 			<GridItem>
@@ -140,13 +168,13 @@ const BookPage = () => {
 					<Heading>Other Random Books</Heading>
 					<RandomBooks className="book-list">
 						{randomBooks && randomBooks.map(book => (
-							<BookItem book={book} />
+							<BookItem key={book.name} book={book} />
 						))}
 					</RandomBooks>
 				</Grid>
 			</GridItem>
 			<Footer/>
-		</Grid>
+		</BookContainer>
 	)
 }
 
