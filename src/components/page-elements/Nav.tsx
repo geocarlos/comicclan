@@ -27,8 +27,8 @@ const activeStyle = `
 `
 
 const NavItem = styled(({text, active, ...props}: INavItem) => <div {...props}>{text}</div>)<INavItem>`
-	padding: .5rem;
-	max-width: 70%;
+	padding: .5rem .1rem;
+	max-width: 90%;
 	border-radius: .5rem;
 	text-align: center;
 	font-weight: bold;

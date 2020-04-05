@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-interface ItemProps extends React.HTMLAttributes<HTMLElement>{
+interface ItemProps extends React.HTMLAttributes<HTMLElement> {
 	column?: string;
 	height?: number;
 	background?: string;
@@ -54,14 +54,6 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		top: 0;
 		z-index: 1000;
 	}
-	footer {
-		grid-column: 1/13;
-		padding: 2px;
-		margin-top: 3em;
-		background: #53535377;
-		text-align: center;
-		color: #fff;
-	}
 	a {
 		color: #5A5A5A;
 		&:hover {
@@ -71,10 +63,32 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 			#5A5A5A;
 		}
 	}
+	.book-list {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, 160px);
+		column-gap: 35px;
+		justify-content: space-between;
+		padding: 0;
+		margin: 0;
+		max-width: 100%;
+	}
 `;
-export const GridItem = styled(({ column, className, height, background, ...props } :ItemProps) => <div className={className} {...props} />)`
+export const GridItem = styled(({ column, className, height, background, ...props }: ItemProps) => <div className={className} {...props} />)`
 	grid-column: ${({ column }) => column || '1/13'};
 	min-height: ${({ height }) => height || 0}vh;
 	padding: 3px;
 	background: ${({ background }) => background || 'transparent'};
+`;
+
+export const Footer = styled(({ ...props }) => (
+	<footer {...props}>
+		Vett.io {new Date().getFullYear()}
+	</footer>
+))`
+	grid-column: 1/13;
+	padding: 2px;
+	margin-top: 3em;
+	background: #53535377;
+	text-align: center;
+	color: #fff;
 `;

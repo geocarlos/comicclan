@@ -15,7 +15,7 @@ const Tile = styled.div`
 	figure {
 		height: 320px;
 		width: 160px;
-		margin: 0;
+		margin-bottom: 1rem;
 		color: #fff;
 		img {
 			@keyframes imgShow {
@@ -31,7 +31,7 @@ const Tile = styled.div`
 		}
 		figcaption {
 			position: absolute;
-			height: 25%;
+			height: 22%;
 			bottom: 0;
 			font-weight: 500;
 			font-size: 12px;
@@ -39,6 +39,11 @@ const Tile = styled.div`
 			p.book-name {
 				font-size: 16px;
 				line-height: 26px;
+			}
+			p.book-owner {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 		}
 	}
@@ -51,15 +56,15 @@ interface IProps {
 const BookItem = ({ book }: IProps) => {
 	return (
 		<Tile>
-			<figure>
-				<Link to={`/books/${book.name}`}>
+			<Link to={`/books/${book.name}`}>
+				<figure>
 					<img alt="book cover" src={book.image} />
-				</Link>
-				<figcaption>
-					<p className="book-name">{book.name}</p>
-					<p className="book-owner">Owned by {book.owner}</p>
-				</figcaption>
-			</figure>
+					<figcaption>
+						<p className="book-name">{book.name}</p>
+						<p className="book-owner">Owned by {book.owner}</p>
+					</figcaption>
+				</figure>
+			</Link>
 		</Tile>
 	)
 }

@@ -9,7 +9,7 @@ import Categories from './page-elements/Categories';
 import Category from './page-elements/Category';
 import { FakeBook } from './page-elements/BookItem';
 import TopBar from './page-elements/TopBar';
-import { Grid, GridItem} from './shared-styled-elements/StyledElements';
+import { Grid, GridItem, Footer} from './shared-styled-elements/StyledElements';
 
 const groupBooks = (books: IBook[], category: Categories): any => {
 	if (category === Categories.RANDOM) {
@@ -77,9 +77,7 @@ const MainPage = () => {
 					</GridItem>
 				</Grid>
 			</GridItem>
-			<footer>
-				Vett.io {new Date().getFullYear()}
-			</footer>
+			<Footer/>
 		</Grid>
 	);
 }

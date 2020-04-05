@@ -10,14 +10,8 @@ interface IProps {
 
 const BookList = styled(({columns, ...props}) => <div {...props} />)`
 	grid-column: 1/13;
-	display: grid;
-	grid-template-columns: repeat(5, 160px);
-	justify-content: space-between;
-	padding: 0;
-	margin: 0;
-	max-width: 100%;
+	display: block;
 	header {
-		grid-column: 1/6;
 		margin-bottom: 1rem;
 		font-family: Roboto;
 		font-style: normal;
@@ -36,10 +30,11 @@ const Category = ({ books, group }: IProps) => {
 	return (
 		<BookList columns={books.length}>
 			<header>{group}</header>
-			{books.map((book: IBook) => (
-				<BookItem key={book.name} book={book} />
-			))}
-
+			<div className="book-list">
+				{books.map((book: IBook) => (
+					<BookItem key={book.name} book={book} />
+				))}
+			</div>
 			<hr/>
 		</BookList>
 	)
