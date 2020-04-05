@@ -10,6 +10,12 @@ import { fetchBooks } from '../actions/Actions';
 import Stars from './page-elements/Stars';
 import BookItem from './page-elements/BookItem';
 
+const BackIcon = (
+	<svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+		<path d="M7.41 1.41L6 0L0 6L6 12L7.41 10.59L2.83 6L7.41 1.41Z" fill="#777777" />
+	</svg>
+)
+
 const BookContainer = styled.div`
 	color: #CCC;
 	background-color: #333;
@@ -43,7 +49,7 @@ const Cover = styled.div`
 	}
 `;
 
-const Description = styled(({...props}) => <div {...props}/>)`
+const Description = styled(({ ...props }) => <div {...props} />)`
 	margin: 2rem 2rem 0 0;
 	font-family: Roboto;
 	font-style: normal;
@@ -74,7 +80,7 @@ const Description = styled(({...props}) => <div {...props}/>)`
 	}
 `;
 
-const BackLink = styled(({...props}) => <div {...props}>{'< '}<Link to='/books'>{'Back to collection'}</Link></div>)`
+const BackLink = styled(({ ...props }) => <div {...props}>{BackIcon} <Link to='/books'>{'Back to collection'}</Link></div>)`
 	margin: 2rem 0 0 2rem;
 	@media (max-width: 800px) {
 		margin: 1rem 0 0 1rem;
@@ -90,7 +96,7 @@ const Heading = styled.div`
 	line-height: 37px;
 `;
 
-const RandomBooks = styled(({className, ...props}) => <div className={className} {...props} />)`
+const RandomBooks = styled(({ className, ...props }) => <div className={className} {...props} />)`
 	grid-column: 1/13;
 	margin: 2rem !important;
 	@media (max-width: 800px) {
@@ -144,7 +150,7 @@ const BookPage = () => {
 			<GridItem>
 				{book && <Page>
 					<Cover>
-						<img src={book.image} alt="book cover"/>
+						<img src={book.image} alt="book cover" />
 					</Cover>
 					<Description>
 						<div className="name-and-rating">
@@ -173,7 +179,7 @@ const BookPage = () => {
 					</RandomBooks>
 				</Grid>
 			</GridItem>
-			<Footer/>
+			<Footer />
 		</BookContainer>
 	)
 }
