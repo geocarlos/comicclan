@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import IBook from '../../models/IBook';
+import { Link } from 'react-router-dom';
 
 const Tile = styled.div`
 	@keyframes loading {
@@ -51,7 +52,9 @@ const BookItem = ({ book }: IProps) => {
 	return (
 		<Tile>
 			<figure>
-				<img alt="book cover" src={book.image} />
+				<Link to={`/books/${book.name}`}>
+					<img alt="book cover" src={book.image} />
+				</Link>
 				<figcaption>
 					<p className="book-name">{book.name}</p>
 					<p className="book-owner">Owned by {book.owner}</p>
