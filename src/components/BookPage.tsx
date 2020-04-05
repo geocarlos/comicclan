@@ -53,7 +53,7 @@ const Description = styled(({...props}) => <div {...props}/>)`
 		line-height: 37px;
 	}
 	.other-info {
-		margin: 1rem 1rem 0 0;
+		margin: 1rem 0;
 		font-weight: 500;
 		font-size: 16px;
 		line-height: 25px;

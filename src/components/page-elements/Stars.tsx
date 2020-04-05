@@ -8,8 +8,8 @@ export const FullStar = () => {
 				<path d="M16.5 21.0875L8.775 25.75L10.825 16.9625L4 11.05L12.9875 10.2875L16.5 2L20.0125 10.2875L29 11.05L22.175 16.9625L24.225 25.75L16.5 21.0875Z" fill="url(#paint0_linear)" />
 			</g>
 			<defs>
-				<filter id="filter0_d" x="0" y="0" width="33" height="31.75" filterUnits="userSpaceOnUse" colorInterpolation-filters="sRGB">
-					<feFlood flood-opacity="0" result="BackgroundImageFix" />
+				<filter id="filter0_d" x="0" y="0" width="33" height="31.75" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+					<feFlood floodOpacity="0" result="BackgroundImageFix" />
 					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
 					<feOffset dy="2" />
 					<feGaussianBlur stdDeviation="2" />
@@ -18,8 +18,8 @@ export const FullStar = () => {
 					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
 				</filter>
 				<linearGradient id="paint0_linear" x1="29" y1="2" x2="29" y2="25.75" gradientUnits="userSpaceOnUse">
-					<stop stop-color="#F4C782" />
-					<stop offset="1" stop-color="#E4964B" />
+					<stop stopColor="#F4C782" />
+					<stop offset="1" stopColor="#E4964B" />
 				</linearGradient>
 			</defs>
 		</svg>
@@ -42,9 +42,9 @@ const ratingToStars = (rating: number) => {
 	const stars = [];
 	for (let i = 1; i <= 5; i++) {
 		if (rating - i >= 0) {
-			stars.unshift(<FullStar />);
+			stars.unshift(<FullStar key={i} />);
 		} else {
-			stars.push(<EmptyStar />)
+			stars.push(<EmptyStar key={i} />)
 		}
 	}
 	return stars;

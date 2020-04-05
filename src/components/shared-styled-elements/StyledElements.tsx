@@ -63,6 +63,13 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		margin: 0;
 		max-width: 100%;
 	}
+	.fake-list {
+		grid-column: 1/13;
+		margin: 0 5rem;
+		max-width: 80vw;
+		max-height: 100%;
+		overflowY: hidden;
+	}
 	@media(max-width: 800px) {
 		.book-list {
 			grid-template-columns: repeat(auto-fill, 140px);

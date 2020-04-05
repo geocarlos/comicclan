@@ -13,8 +13,8 @@ const Tile = styled.div`
 	padding: 3px;
 	font-size: 2rem;
 	figure {
-		height: 320px;
 		width: 160px;
+		height: 320px;
 		margin-bottom: 1rem;
 		color: #fff;
 		img {
@@ -31,7 +31,7 @@ const Tile = styled.div`
 		}
 		figcaption {
 			position: absolute;
-			height: 10%;
+			height: 22%;
 			bottom: 0;
 			font-weight: 500;
 			font-size: 12px;
@@ -49,11 +49,14 @@ const Tile = styled.div`
 	}
 	@media (max-width: 800px) {
 		width: 140px;
-		height: 240px;
-		margin-bottom: 3rem;
+		height: 280px;
+		margin-bottom: 1rem;
 		figure {
-			height: 240px;
 			width: 140px;
+			height: 280px;
+		}
+		figcaption {
+			height: 10%;
 		}
 	}
 `;
