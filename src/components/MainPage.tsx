@@ -12,6 +12,9 @@ import TopBar from './page-elements/TopBar';
 import { Grid, GridItem} from './shared-styled-elements/StyledElements';
 
 const groupBooks = (books: IBook[], category: Categories): any => {
+	if (category === Categories.RANDOM) {
+		return {Random: books.slice(0).sort(() => 0.5 - Math.random())}
+	}
 	const groups: any = {};
 	for (const book of books) {
 		if (!groups[book[category]]) {
@@ -37,10 +40,6 @@ const MainPage = () => {
 	}, [books, category])
 
 	const handleChooseCategory = (cat: Categories) => {
-		if (cat === Categories.RANDOM) {
-			setCategory([Categories.ARTIST, Categories.YEAR, Categories.WRITER, Categories.OWNER][Math.floor(Math.random() * 4)]);
-			return;
-		}
 		setCategory(cat);
 	}
 
