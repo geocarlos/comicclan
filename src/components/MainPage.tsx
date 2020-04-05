@@ -8,6 +8,7 @@ import IBook from '../models/IBook';
 import IStore from '../store/IStore';
 import Categories from './page-elements/Categories';
 import Category from './page-elements/Category';
+import { FakeBook } from './page-elements/BookItem';
 
 interface ItemProps extends React.HTMLAttributes<HTMLElement>{
 	column?: string;
@@ -67,6 +68,7 @@ const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowGap }) =
 		grid-column: 1/13;
 		position: sticky;
 		top: 0;
+		z-index: 1000;
 	}
 	footer {
 		grid-column: 1/13;
@@ -98,6 +100,7 @@ const groupBooks = (books: IBook[], category: Categories): any => {
 const MainPage = () => {
 	const dispatch = useDispatch();
 	const books: IBook[] = useSelector((state: IStore) => state.list.books);
+	const isLoading = useSelector((state: IStore) => state.list.isLoading);
 	const [groups, setGroups] = useState<any>();
 	const [category, setCategory] = useState(Categories.YEAR);
 	useEffect(() => {
@@ -116,7 +119,16 @@ const MainPage = () => {
 		setCategory(cat);
 	}
 
-	console.log(groups);
+	const searchBooks = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setGroups(groupBooks(books.filter(book => book.name.toLowerCase().includes(event.target.value.toLowerCase())), category));
+	}
+
+	const fakeList = [];
+	
+	for (let i = 1; i <= 30; i++) {
+		fakeList.push(i);
+	}
+	
 	return (
 		<Grid>
 			<GridItem className="top-bar" height={8} background="#535353">
@@ -129,7 +141,7 @@ const MainPage = () => {
 				<Grid heightSub={7}>
 					<Grid className="header">
 						<GridItem height={10} className="search-box content">
-							<Search query={''} />
+							<Search setQuery={searchBooks} />
 						</GridItem>
 						<GridItem height={10} className="content nav">
 							<Grid>
@@ -139,7 +151,7 @@ const MainPage = () => {
 					</Grid>
 					<GridItem>
 						<Grid columns={5} rowGap={3} className="content category-list">
-							{groups && Object.keys(groups).reverse().map((key: string) => (
+							{isLoading ? fakeList.map(i => (<FakeBook />)) : groups && Object.keys(groups).reverse().map((key: string) => (
 								<Category key={key} group={key} books={groups[key]} />
 							))}
 						</Grid>

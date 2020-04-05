@@ -12,17 +12,18 @@ const BookList = styled(({columns, ...props}) => <div {...props} />)`
 	grid-column: ${({columns}) => `auto / span ${columns}`};
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: start;
-	border-bottom: solid;
-	padding: 2em;
+	justify-content: space-between;
+	padding: 1em 0;
+	margin: 0;
 	max-width: 100%;
 	header {
 		width: 100%;
+		margin-left: 10%;
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 22px;
-		line-height: 29px;
+		font-size: 21px;
+		line-height: 25px;
 	}
 `;
 
