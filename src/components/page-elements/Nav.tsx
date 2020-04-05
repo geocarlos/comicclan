@@ -38,7 +38,7 @@ const NavItem = styled(({text, active, ...props}: INavItem) => <div {...props}>{
 	&:hover {
 		${activeStyle}
 	}
-	@media (max-width: 800px) {
+	@media (max-width: 600px) {
 		font-size: 16px;
 		border-radius: .3rem;
 		padding: .2rem .1rem;
