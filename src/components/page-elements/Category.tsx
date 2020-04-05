@@ -9,21 +9,26 @@ interface IProps {
 }
 
 const BookList = styled(({columns, ...props}) => <div {...props} />)`
-	grid-column: ${({columns}) => `auto / span ${columns}`};
-	display: flex;
-	flex-wrap: wrap;
+	grid-column: 1/13;
+	display: grid;
+	grid-template-columns: repeat(5, 160px);
 	justify-content: space-between;
-	padding: 1em 0;
+	padding: 0;
 	margin: 0;
 	max-width: 100%;
 	header {
-		width: 100%;
-		margin-left: 10%;
+		grid-column: 1/6;
+		margin-bottom: 1rem;
 		font-family: Roboto;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 21px;
+		font-size: 32px;
 		line-height: 25px;
+	}
+	hr{
+		grid-column: 1/6;
+		margin-top: 1rem;
+		border: 2px solid #535353;
 	}
 `;
 
@@ -34,6 +39,8 @@ const Category = ({ books, group }: IProps) => {
 			{books.map((book: IBook) => (
 				<BookItem key={book.name} book={book} />
 			))}
+
+			<hr/>
 		</BookList>
 	)
 }

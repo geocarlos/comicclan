@@ -30,7 +30,7 @@ const MainPage = () => {
 	const books: IBook[] = useSelector((state: IStore) => state.list.books);
 	const isLoading = useSelector((state: IStore) => state.list.isLoading);
 	const [groups, setGroups] = useState<any>();
-	const [category, setCategory] = useState(Categories.YEAR);
+	const [category, setCategory] = useState<Categories>(Categories.YEAR);
 	useEffect(() => {
 		dispatch(fetchBooks('https://comicclan.vett.io/comics'));
 	}, [dispatch])
@@ -57,7 +57,7 @@ const MainPage = () => {
 		<Grid>
 			<TopBar />
 			<GridItem>
-				<Grid heightSub={7}>
+				<Grid heightSub={10}>
 					<Grid className="header">
 						<GridItem height={10} className="search-box content">
 							<Search setQuery={searchBooks} />

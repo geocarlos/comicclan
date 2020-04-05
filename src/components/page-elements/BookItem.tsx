@@ -4,10 +4,6 @@ import IBook from '../../models/IBook';
 import { Link } from 'react-router-dom';
 
 const Tile = styled.div`
-	@keyframes loading {
-		from {opacity: 0;}
-		to {opacity: 1;}
-	}
 	display: flex;
 	width: 160px;
 	height: 320px;
@@ -17,31 +13,35 @@ const Tile = styled.div`
 	padding: 3px;
 	font-size: 2rem;
 	figure {
-		height: 300px;
+		height: 320px;
 		width: 160px;
 		margin: 0;
 		color: #fff;
 		img {
+			@keyframes imgShow {
+				from {opacity: 0;}
+				to {opacity: 1;}
+			}
 			max-width: 100%;
 			background: linear-gradient(180deg, #9C5A9D 0%, rgba(241, 84, 84, 0.48137) 100%);
 			box-shadow: 2px 2px 4px rgba(34, 34, 34, 0.7);
+			animation: imgshow;
+			animation: imgShow 3s;
+			animation-iteration-count: 1;
 		}
 		figcaption {
 			position: absolute;
+			height: 25%;
 			bottom: 0;
 			font-weight: 500;
 			font-size: 12px;
 			line-height: 19px;
-			animation: loading;
-			animation-duration: 1s;
 			p.book-name {
 				font-size: 16px;
 				line-height: 26px;
 			}
 		}
 	}
-	animation: loading;
-	animation-duration: 1s;
 `;
 
 interface IProps {

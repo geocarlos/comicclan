@@ -27,7 +27,7 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 	font-style: normal;
 	color: #5A5A5A;
 	background-color: #333;
-	min-height: ${({ heightSub }) => heightSub ? `calc(100vh - ${heightSub}px)` : '100%'};
+	min-height: ${({ heightSub }) => heightSub ? `${100 - heightSub}vh` : '100%'};
 	.top-bar {
 		display: flex;
 		align-items: center;
@@ -48,13 +48,6 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		max-width: 1100px;
 		margin: auto;
 	}
-	.category-list {
-		grid-column: 1/13;
-		display: grid;
-		grid-template-columns: repeat(5, auto)
-		grid-auto-rows: min-content;
-		justify-content: space-between;
-	}
 	.header {
 		grid-column: 1/13;
 		position: sticky;
@@ -68,6 +61,15 @@ export const Grid = styled.div.attrs<ContainerProps>(({ heightSub, columns, rowG
 		background: #53535377;
 		text-align: center;
 		color: #fff;
+	}
+	a {
+		color: #5A5A5A;
+		&:hover {
+			#5A5A5A;
+		}
+		&:visited{
+			#5A5A5A;
+		}
 	}
 `;
 export const GridItem = styled(({ column, className, height, background, ...props } :ItemProps) => <div className={className} {...props} />)`
