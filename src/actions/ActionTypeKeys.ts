@@ -1,0 +1,7 @@
+enum ActionTypeKeys {
+	REQUEST_BOOKS = 'REQUEST_BOOKS',
+	RECEIVE_BOOKS = 'RECEIVE_BOOKS',
+	ERROR_RECEIVING_BOOKS = 'ERROR_RECEIVING_BOOKS'
+}
+
+export default ActionTypeKeys;
